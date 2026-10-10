@@ -17,6 +17,18 @@ st.write("Partnerlerin doğum bilgilerini girerek harita yerleşimlerini ve yapa
 api_key = st.secrets.get("GEMINI_API_KEY", "")
 client = genai.Client(api_key=api_key)
 
+def analizi_kaydet(p1_ad, d1_tarih, p2_ad, d2_tarih):
+    csv_dosya = "analiz_kayitlari.csv"
+    dosya_yeni = not os.path.exists(csv_dosya)
+    
+    with open(csv_dosya, mode="a", newline="", encoding="utf-8") as f:
+        yazici = csv.writer(f)
+        if dosya_yeni:
+            yazici.writerow(["Islem_Zamani", "Partner1_Isim", "Partner1_Dogum", "Partner2_Isim", "Partner2_Dogum"])
+        
+        simdi = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        yazici.writerow([simdi, p1_ad, str(d1_tarih), p2_ad, str(d2_tarih)])
+
 # Arka planda gizlice tutulan kayıt dosyası
 CSV_DOSYASI = "sorgu_gecmisi.csv"
 
@@ -78,6 +90,7 @@ with col2:
     t2 = st.time_input("Doğum Saati (P2)", datetime.time(12, 0), key="t2") if biliniyor2 else None
 
 if st.button("Uyum Analizini Başlat 🔮", type="primary"):
+    analizi_kaydet(p1_isim, d1, p2_isim, d2)
     p1_saat = t1.hour if biliniyor1 else None
     p1_dakika = t1.minute if biliniyor1 else None
     
