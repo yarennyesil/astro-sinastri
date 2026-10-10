@@ -44,12 +44,16 @@ with col1:
     st.subheader("Partner 1 Bilgileri")
     p1_isim = st.text_input("İsim / Lakap (P1)", placeholder="Örn: Dilek", key="isim1")
     
-    d1 = st.date_input(
-    "Doğum Tarihi (P1)",
-    value=date(2000, 5, 14),
-    min_value=date(1920, 1, 1),
-    max_value=date.today()
-)
+    st.write("**Doğum Tarihi (P1)**")
+    c_d1, c_m1, c_y1 = st.columns(3)
+    with c_d1:
+        gun1 = st.selectbox("Gün", list(range(1, 32)), index=13, key="d1_gun")
+    with c_m1:
+        ay1 = st.selectbox("Ay", list(range(1, 13)), index=4, key="d1_ay")
+    with c_y1:
+        yil1 = st.selectbox("Yıl", list(range(2026, 1919, -1)), index=26, key="d1_yil")
+
+    d1 = date(yil1, ay1, gun1)
 
 
 
@@ -60,12 +64,16 @@ with col2:
     st.subheader("Partner 2 Bilgileri")
     p2_isim = st.text_input("İsim / Lakap (P2)", placeholder="Örn: Orhan", key="isim2")
     
-    d2 = st.date_input(
-    "Doğum Tarihi (P2)",
-    value=date(2001, 10, 22),
-    min_value=date(1920, 1, 1),
-    max_value=date.today()
-    )
+    st.write("**Doğum Tarihi (P2)**")
+    c_d2, c_m2, c_y2 = st.columns(3)
+    with c_d2:
+        gun2 = st.selectbox("Gün", list(range(1, 32)), index=21, key="d2_gun")
+    with c_m2:
+        ay2 = st.selectbox("Ay", list(range(1, 13)), index=9, key="d2_ay")
+    with c_y2:
+        yil2 = st.selectbox("Yıl", list(range(2026, 1919, -1)), index=25, key="d2_yil")
+
+    d2 = date(yil2, ay2, gun2)
     biliniyor2 = st.checkbox("Doğum saatini biliyorum", value=False, key="c2")
     t2 = st.time_input("Doğum Saati (P2)", datetime.time(12, 0), key="t2") if biliniyor2 else None
 
