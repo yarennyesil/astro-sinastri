@@ -42,14 +42,29 @@ col1, col2 = st.columns(2)
 with col1:
     st.subheader("Partner 1 Bilgileri")
     p1_isim = st.text_input("İsim / Lakap (P1)", placeholder="Örn: Dilek", key="isim1")
-    d1 = st.date_input("Doğum Tarihi (P1)", datetime.date(2000, 5, 14), key="d1")
+    
+    d1 = st.date_input(
+    "Doğum Tarihi (P1)",
+    value=date(2000, 5, 14),
+    min_value=date(1920, 1, 1),
+    max_value=date.today()
+)
+
+
+
     biliniyor1 = st.checkbox("Doğum saatini biliyorum", value=True, key="c1")
     t1 = st.time_input("Doğum Saati (P1)", datetime.time(15, 30), key="t1") if biliniyor1 else None
 
 with col2:
     st.subheader("Partner 2 Bilgileri")
     p2_isim = st.text_input("İsim / Lakap (P2)", placeholder="Örn: Orhan", key="isim2")
-    d2 = st.date_input("Doğum Tarihi (P2)", datetime.date(2001, 10, 22), key="d2")
+    
+    d2 = st.date_input(
+    "Doğum Tarihi (P2)",
+    value=date(2001, 10, 22),
+    min_value=date(1920, 1, 1),
+    max_value=date.today()
+    )
     biliniyor2 = st.checkbox("Doğum saatini biliyorum", value=False, key="c2")
     t2 = st.time_input("Doğum Saati (P2)", datetime.time(12, 0), key="t2") if biliniyor2 else None
 
