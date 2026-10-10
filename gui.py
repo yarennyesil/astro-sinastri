@@ -112,3 +112,23 @@ st.markdown(
     "<p style='text-align: center; color: gray;'>Created by <b>Yaren Nurhak Yeşil</b> ✨</p>", 
     unsafe_allow_html=True
 )
+# --- TAMAMEN GİZLİ YÖNETİCİ GEÇMİŞ İNDİRME ALANI ---
+import os
+
+# Sadece URL'de ?admin=1 yazarsa bu kutu tetiklenir
+sorgu_parametreleri = st.query_params
+if sorgu_parametreleri.get("admin") == "1":
+    with st.expander("🔒 Yönetici Paneli"):
+        girilen_sifre = st.text_input("Şifre", type="password")
+        if girilen_sifre == "yaren2026":  # İstediğin şifreyi buraya yazabilirsin
+            csv_adi = "analiz_kayitlari.csv"
+            if os.path.exists(csv_adi):
+                with open(csv_adi, "rb") as f:
+                    st.download_button(
+                        label="📥 Analiz Geçmişini İndir (CSV)",
+                        data=f,
+                        file_name="analiz_kayitlari.csv",
+                        mime="text/csv"
+                    )
+            else:
+                st.info("Kayıt dosyası henüz oluşmadı veya boş.")
