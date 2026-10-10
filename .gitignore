@@ -1,0 +1,5 @@
+sorgu_gecmisi.csv
+__pycache__/
+.env
+.venv/
+.streamlit/secrets.toml
